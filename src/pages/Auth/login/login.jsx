@@ -30,6 +30,7 @@ const Login = () => {
 
     let getRes = (res) => {
       if (res.status == 200) {
+        console.log('res of login', res)
         dispatch(userData(res?.data?.user));
         dispatch(accessToken(res?.data?.token));
         dispatch(refreshToken(res?.data?.refreshToken));

@@ -1,6 +1,7 @@
 import React from "react";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import {
+  UploadIcon,
   homeIcon,
   logOutIcon,
   productIcon,
@@ -18,7 +19,7 @@ import Products from "../pages/products/products";
 import { useDispatch } from "react-redux";
 import { accessToken, refreshToken, userData } from "../redux/userDataSlice";
 import { useToken } from "antd/es/theme/internal";
-import Services from "../pages/services/services";
+// import Services from "../pages/services/services";
 import AddNewService from "../pages/addNewService/addNewService";
 import UpdateService from "../pages/updateService/updateService";
 import UserList from "../pages/userList/userList";
@@ -31,6 +32,10 @@ import Loader from "../components/loader/loader";
 import { GreenNotify, RedNotify } from "../helper/helper";
 import Dashboard from "../pages/dashboard/dashboard";
 import Reviews from "../pages/Reviews/reviews";
+import EditModal from "../components/editModal/editModal";
+import EditQuote from "../pages/EditQoute/EditQuote";
+import Quotes from "../pages/quotes/quotes";
+import ExcelToJson from "../pages/exceltojson/ExcelToJson";
 
 const { Header, Content, Footer, Sider } = Layout;
 const LayoutDashboard = () => {
@@ -72,17 +77,17 @@ const LayoutDashboard = () => {
         <div
           onClick={() => navigate("/")}
           style={{
-            padding: "2rem 0",
+            paddingTop: "4rem",
             textAlign: "center",
             color: "white",
-            fontSize: "3rem",
+            fontSize: "2.3rem",
             cursor: "pointer",
           }}
         >
-          NOVA
+          Motivational Quotes
         </div>
         <Menu
-          style={{ marginTop: "5rem" }}
+          style={{ marginTop: "7rem" }}
           inlineCollapsed={true}
           theme="dark"
           defaultSelectedKeys={["1"]}
@@ -91,56 +96,40 @@ const LayoutDashboard = () => {
         >
           <Menu.Item
             style={{ marginBottom: "2rem" }}
-            onClick={() => navigate("/products")}
-            icon={<img className="side-bar-icon" src={productIcon} />}
-            key="90"
-          >
-            Products
-          </Menu.Item>
-          <Menu.Item
-            style={{ marginBottom: "2rem" }}
-            onClick={() => navigate("/services")}
-            icon={<img className="side-bar-icon" src={serviceIcon} />}
+            onClick={() => navigate("/quotes")}
+            icon={<img className="side-bar-icon" src={serviceIcon} alt="" />}
             key="92"
           >
-            Services
+            Quotes
           </Menu.Item>
 
           <Menu.Item
             style={{ marginBottom: "2rem" }}
             onClick={() => navigate("/user-list")}
-            icon={<img className="side-bar-icon" src={userIcon} />}
+            icon={<img className="side-bar-icon" src={userIcon} alt="" />}
             key="95"
           >
             Users
           </Menu.Item>
-          <Menu.Item
-            style={{ marginBottom: "2rem" }}
-            onClick={() => navigate("/products-order-list")}
-            icon={<img className="side-bar-icon" src={productOrder} />}
-            key="99"
-          >
-            Product Orders
-          </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             style={{ marginBottom: "2rem" }}
             onClick={() => navigate("/services-order-list")}
-            icon={<img className="side-bar-icon" src={serviceOrder} />}
+            icon={<img className="side-bar-icon" src={serviceOrder} alt="" />}
             key="105"
           >
             Service Orders
-          </Menu.Item>
+          </Menu.Item> */}
           <Menu.Item
             style={{ marginBottom: "2rem" }}
-            onClick={() => navigate("/reviews-list")}
-            icon={<img className="side-bar-icon" src={reviewIcon} />}
+            onClick={() => navigate("/ExcelToJson")}
+            icon={<img className="side-bar-icon" src={UploadIcon} alt="" />}
             key="108"
           >
-            Reviews
+            Upload
           </Menu.Item>
           <Menu.Item
             style={{ marginTop: "5rem" }}
-            icon={<img className="side-bar-icon" src={logOutIcon} />}
+            icon={<img className="side-bar-icon" src={logOutIcon} alt="" />}
             onClick={logOut}
             key="89"
           >
@@ -158,11 +147,14 @@ const LayoutDashboard = () => {
           <Routes>
             <Route path="/" element={<Dashboard />}></Route>
             <Route path="/products" element={<Products />}></Route>
-            <Route path="/services" element={<Services />}></Route>
+            <Route path="/quotes" element={<Quotes />}></Route>
             <Route path="/new-service" element={<AddNewService />}></Route>
             <Route path="/update-service" element={<UpdateService />}></Route>
             <Route path="/user-list" element={<UserList />}></Route>
-            <Route path="/reviews-list" element={<Reviews />}></Route>
+            <Route path="/ExcelToJson" element={<ExcelToJson />}></Route>
+            <Route path="/editModal" element={<EditModal />}></Route>
+            {/* <Route path="/editop" element={<EditOp />}></Route> */}
+            <Route path="/editquote" element={<EditQuote />}></Route>
             <Route
               path="/products-order-list"
               element={<ProductOrder />}

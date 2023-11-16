@@ -3,7 +3,7 @@ import configureAppStore from "../redux/store";
 import { DeviceUUID } from "device-uuid";
 import { accessToken } from "../redux/userDataSlice";
 
-const BASE_URL = "https://rxje2xzpme.us-east-1.awsapprunner.com/api/v1/";
+const BASE_URL = "http://ec2-13-55-98-140.ap-southeast-2.compute.amazonaws.com/api/v1";
 export const Method = {
   GET: "GET",
   POST: "POST",
@@ -55,7 +55,7 @@ export const callApi = async (
     defaultHeaders["Content-Type"] = "application/json";
   }
   if (token) {
-    defaultHeaders["Authorization"] = token;
+    defaultHeaders["Authorization"] = token
   }
   // console.log("token==>  ", token)
   //console.log('defaultHeaders==> ', defaultHeaders);

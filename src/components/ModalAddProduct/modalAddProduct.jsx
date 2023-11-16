@@ -15,9 +15,9 @@ const ModalAddProduct = ({
   setAddProduct,
 }) => {
   const [title, setTitle] = useState(addProduct ? "" : item?.title);
-  const [description, setDescription] = useState(
-    addProduct ? "" : item?.description
-  );
+    const [description, setDescription] = useState(
+      addProduct ? "" : item?.description
+    );
   const [count, setCount] = useState(addProduct ? 0 : item?.qty);
   const [price, setPrice] = useState(addProduct ? 0 : item?.price);
   const fileInputRef = useRef(null);

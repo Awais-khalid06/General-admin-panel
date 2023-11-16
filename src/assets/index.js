@@ -17,3 +17,5 @@ export { default as productIcon1 } from "./product-d.png";
 export { default as serviceIcon1 } from "./service-d.png";
 export { default as logOutIcon } from "./log-out.png";
 export { default as reviewIcon } from "./reviews.png";
+export { default as addModal } from "./add-modal.png";
+export { default as UploadIcon } from "./upload.png";

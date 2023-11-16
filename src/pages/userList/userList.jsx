@@ -10,6 +10,7 @@ import moment from "moment/moment";
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [isloading, setIsLoading] = useState(false);
+  const [updateApi, setUpdateApi] = useState(false);
   const getAllUser = () => {
     let getRes = (res) => {
       console.log("res of user list", res);
@@ -20,21 +21,35 @@ const UserList = () => {
       console.log("error", error);
     });
   };
+  const deleteUser = (id) => {
+    setUpdateApi(false);
+    let getRes = (res) => {
+      console.log("res of user list", res);
+      setUpdateApi(true);
+    };
+
+    callApi(
+      "DELETE",
+      `${routes.DeleteUser}/${id}`,
+      null,
+      setIsLoading,
+      getRes,
+      (error) => {
+        console.log("error", error);
+      }
+    );
+  };
 
   useEffect(() => {
     getAllUser();
-  }, []);
+  }, [updateApi]);
   const columns = [
     {
-      title: "First Name",
+      title: "Name",
       dataIndex: "firstName",
       className: "role-name-column-header",
     },
-    {
-      title: "Last Name",
-      dataIndex: "lastName",
-      className: "role-name-column-header",
-    },
+
     {
       title: "Email",
       dataIndex: "email",
@@ -61,13 +76,24 @@ const UserList = () => {
       align: "center",
       className: "action-column-header",
     },
+    {
+      title: "Subscription",
+      dataIndex: "subscription",
+      align: "center",
+      className: "action-column-header",
+    },
+    {
+      title: "Delete",
+      dataIndex: "delete",
+      align: "center",
+      className: "action-column-header",
+    },
   ];
 
   const data = users?.map((item, index) => {
     return {
       key: index,
-      firstName: item?.firstname,
-      lastName: item?.lastname,
+      firstName: item?.name,
       email: item?.email,
       dob: moment(item?.dob).format("MM-DD-YYYY"),
       profilePicture: (
@@ -78,6 +104,23 @@ const UserList = () => {
       verified: (
         <div className="server-roles-trash-btn">
           <img src={item?.verified ? trueIcon : crossIcon} alt="" />
+        </div>
+      ),
+      subscription: (
+        <p>
+          {item?.subscriptionPlan === "free"
+            ? "Free"
+            : item.subscriptionPlan === "monthly"
+            ? "Monthly"
+            : "Yearly"}
+        </p>
+      ),
+      delete: (
+        <div
+          style={{ cursor: "pointer" }}
+          onClick={() => deleteUser(item?._id)}
+        >
+          <img src={redTrash} alt="" />
         </div>
       ),
     };
