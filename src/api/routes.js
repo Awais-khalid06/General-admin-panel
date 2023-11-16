@@ -16,6 +16,7 @@ export default {
   deleteQuote: BASE_URL + "/quotes",
   updateQuote: BASE_URL + "/quotes",
   createQuote: BASE_URL + "/quotes/create",
+  getStats: BASE_URL + "/user/stats",
 
   // -----------Products--------------//
 

@@ -20,58 +20,62 @@ import Loader from "../../components/loader/loader";
 const Dashboard = () => {
   const [value, setValue] = useState(new Date());
   const [isloading, setIsLoading] = useState(true);
-  const [state, setState] = useState();
+  const [stats, setStats] = useState({});
 
   const stateArr = [
     {
-      title: "Total User",
-      count: state?.allusers,
+      title: "Total Users",
+      count: stats?.users,
       icon: userIcon1,
     },
     {
-      title: "Total Product",
-      count: state?.products,
+      title: "Total Quotes",
+      count: stats?.quotes,
       icon: productIcon1,
     },
     {
-      title: "Total Service",
-      count: state?.services,
+      title: "Total Reminders",
+      count: stats?.reminders,
       icon: serviceIcon1,
-    },
-    {
-      title: "Product Order",
-      count: state?.productorder,
-      icon: orderIcon1,
-    },
-    {
-      title: "Services Order",
-      count: state?.serviceorder,
-      icon: orderIcon1,
     },
   ];
 
-  const getState = () => {
+  // const getState = () => {
+  //   let getRes = (res) => {
+  //     setState(res?.data?.data);
+  //     console.log("res of get state", res);
+  //     // setShowModal(false);
+  //   };
+
+  //   callApi("GET", routes.getState, null, setIsLoading, getRes, (error) => {
+  //     setState(error);
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => setValue(new Date()), 1000);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
+  const getStats = () => {
     let getRes = (res) => {
-      setState(res);
-      console.log("res of get state", res);
-      // setShowModal(false);
+      console.log("res of getStats", res);
+      setStats(res);
     };
 
-    callApi("GET", routes.getState, null, setIsLoading, getRes, (error) => {
-      setState(error);
-      //console.log("error", error);
+    callApi("GET", routes.getStats, null, setIsLoading, getRes, (error) => {
+      console.log("error", error);
     });
   };
 
   useEffect(() => {
-    const interval = setInterval(() => setValue(new Date()), 1000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  useEffect(() => {
-    getState();
+    getStats();
   }, []);
 
   return (
