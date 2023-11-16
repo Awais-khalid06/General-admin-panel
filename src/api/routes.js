@@ -1,5 +1,5 @@
 export const BASE_URL =
-  "http://ec2-13-55-98-140.ap-southeast-2.compute.amazonaws.com/api/v1";
+  "https://gzwxdhi422.eu-central-1.awsapprunner.com/api/v1";
 
 export default {
   // -----AUTH------//
