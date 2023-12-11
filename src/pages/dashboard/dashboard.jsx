@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./dashboard.css";
-import { Breadcrumb, Button, Select, Table, Image } from "antd";
+import { Breadcrumb } from "antd";
 import {
+  dashboardUser,
   homeIcon,
-  orderIcon1,
-  productIcon,
   productIcon1,
-  redTrash,
-  serviceIcon,
   serviceIcon1,
-  userIcon1,
 } from "../../assets";
 import Clock from "react-clock";
 import "react-clock/dist/Clock.css";
 import moment from "moment/moment";
 import { callApi } from "../../api/apiCaller";
-import routes from "../../api/routes";
+import { routes } from "../../api/routes";
 import Loader from "../../components/loader/loader";
 const Dashboard = () => {
-  const [value, setValue] = useState(new Date());
+  // const [value, setValue] = useState(new Date());
   const [isloading, setIsLoading] = useState(true);
   const [stats, setStats] = useState({});
 
@@ -26,38 +22,19 @@ const Dashboard = () => {
     {
       title: "Total Users",
       count: stats?.users,
-      icon: userIcon1,
+      icon: dashboardUser,
     },
     {
-      title: "Total Quotes",
+      title: "Total",
       count: stats?.quotes,
       icon: productIcon1,
     },
     {
-      title: "Total Reminders",
+      title: "Total",
       count: stats?.reminders,
       icon: serviceIcon1,
     },
   ];
-
-  // const getState = () => {
-  //   let getRes = (res) => {
-  //     setState(res?.data?.data);
-  //     console.log("res of get state", res);
-  //     // setShowModal(false);
-  //   };
-
-  //   callApi("GET", routes.getState, null, setIsLoading, getRes, (error) => {
-  //     setState(error);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => setValue(new Date()), 1000);
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, []);
 
   useEffect(() => {
     getStats();
@@ -82,8 +59,15 @@ const Dashboard = () => {
     <div className="admin-products-main-container">
       <Loader loading={isloading} />
       <Breadcrumb separator=">" className="bread-crumb">
-        <div className="configure-server-home-icon">
-          <img src={homeIcon} alt="home-icon" />
+        <div className="icon-dashboard">
+          <img
+            style={{
+              width: "1.7rem",
+              height: "1.7rem",
+            }}
+            src={homeIcon}
+            alt="home-icon"
+          />
         </div>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
         <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
@@ -101,11 +85,13 @@ const Dashboard = () => {
               </div>
             </div>
           ))}
-
-          {/* <div className="dashboard-state-count-container"></div> */}
         </div>
         <div className="dashboard-pie-chart-container">
-          <Clock size={120} value={value} />
+          <Clock
+            size={120}
+
+            // value={value}
+          />
           <p>
             Current time:{" "}
             <span style={{ color: "red", fontWeight: "700" }}>

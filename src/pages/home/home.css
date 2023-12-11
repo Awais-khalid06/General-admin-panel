@@ -1,3 +1,13 @@
+.services-background-image img {
+  width: 8rem;
+  height: 8rem;
+}
+.service-background-option img {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
 .admin-products-main-container {
   background-color: #fff;
   padding: 0 2.4rem;
@@ -74,7 +84,7 @@
   width: 1rem;
   height: 1rem;
   margin-right: 1.2rem;
-  margin-top: -0.2rem;
+  /* margin-top: -0.2rem; */
 }
 
 .bread-crumb {
@@ -83,4 +93,64 @@
   font-weight: 400;
   font-size: 12px;
   line-height: 16px;
+}
+
+.server-roles-add-btn {
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--theme-color);
+  cursor: pointer;
+}
+
+.server-roles-add-btn img {
+  width: 1.7rem;
+  height: 1.7rem;
+  margin-right: 1rem;
+}
+.server-roles-add-btn p {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: #fff;
+}
+
+.configure-server-roles-main-heading-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.7rem;
+}
+.configure-server-roles-main-heading-container h1 {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 24px;
+  color: #06141c;
+}
+
+.server-roles-tb-main-container {
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0px 0px 8px 1px rgba(9, 161, 218, 0.1);
+  margin-top: 1.5rem;
+}
+
+.ant-table-wrapper .ant-table-thead > tr > th {
+  background-color: rgb(12, 53, 92);
+  color: white;
+}
+
+.configure-server-home-icon img {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 0.5rem;
+  margin-top: -0.2rem;
+}
+
+.admin-products-main-container {
+  background-color: #fff;
+  padding: 0 2.4rem;
 }

@@ -2,3 +2,14 @@
   width: 3rem;
   height: 3rem;
 }
+
+.icon {
+  filter: invert(100%);
+  width: 3rem;
+  height: 3rem;
+}
+
+.log-out {
+  width: 2rem;
+  height: 2rem;
+}

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./login.css";
 import { Form, Input, Button, Checkbox } from "antd";
 import { DeviceUUID } from "device-uuid";
-import { UserOutlined } from "@ant-design/icons";
 import { callApi } from "../../../api/apiCaller";
 import { useDispatch } from "react-redux";
 import {
@@ -11,7 +10,7 @@ import {
   userData,
 } from "../../../redux/userDataSlice";
 import { useNavigate } from "react-router-dom";
-import routes from "../../../api/routes";
+import { routes } from "../../../api/routes";
 import Loader from "../../../components/loader/loader";
 import { GreenNotify, RedNotify } from "../../../helper/helper";
 
@@ -29,13 +28,12 @@ const Login = () => {
     }
 
     let getRes = (res) => {
-      if (res.status == 200) {
-        console.log('res of login', res)
+      if (res.status === 200) {
+        console.log("res of login", res);
         dispatch(userData(res?.data?.user));
         dispatch(accessToken(res?.data?.token));
         dispatch(refreshToken(res?.data?.refreshToken));
         GreenNotify("Login Successfully");
-        // GreenNotify(res.message);
         navigate("/", { replace: true });
       } else {
         RedNotify(res.message);

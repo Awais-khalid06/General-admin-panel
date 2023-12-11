@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import "./userList.css";
-import { Breadcrumb, Button, Select, Table, Image } from "antd";
+import "./users.css";
+import { Breadcrumb, Table, Image } from "antd";
 import { crossIcon, homeIcon, redTrash, trueIcon } from "../../assets";
 import { callApi } from "../../api/apiCaller";
-import routes from "../../api/routes";
+import { routes } from "../../api/routes";
 import Loader from "../../components/loader/loader";
 import moment from "moment/moment";
 
-const UserList = () => {
+const Users = () => {
   const [users, setUsers] = useState([]);
   const [isloading, setIsLoading] = useState(false);
   const [updateApi, setUpdateApi] = useState(false);
@@ -17,7 +17,7 @@ const UserList = () => {
       setUsers(res?.data?.data);
     };
 
-    callApi("GET", routes.getAllUser, null, setIsLoading, getRes, (error) => {
+    callApi("GET", routes, null, setIsLoading, getRes, (error) => {
       console.log("error", error);
     });
   };
@@ -56,7 +56,6 @@ const UserList = () => {
       align: "center",
       className: "type-name-column-header",
       width: 400,
-      // render: (text) => <span style={{ color: "#34ADF4" }}>{text}</span>,
     },
     {
       title: "Date of Birth",
@@ -140,10 +139,10 @@ const UserList = () => {
           <img src={homeIcon} alt="home-icon" />
         </div>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>User List</Breadcrumb.Item>
+        <Breadcrumb.Item>Users</Breadcrumb.Item>
       </Breadcrumb>
       <div className="configure-server-roles-main-heading-container">
-        <h1>User List</h1> <div></div>
+        <h1>Users</h1>
       </div>
       <div className="server-roles-tb-main-container">
         <Table
@@ -151,11 +150,10 @@ const UserList = () => {
           columns={columns}
           dataSource={data}
           pagination={true}
-          className="subscriptionapi-table"
         ></Table>
       </div>
     </div>
   );
 };
 
-export default UserList;
+export default Users;

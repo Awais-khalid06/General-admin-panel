@@ -1,26 +1,18 @@
 import React, { useState, useEffect } from "react";
-import "./quotes.css";
-import { Breadcrumb, Table, Image, Input, Button, Modal } from "antd";
+import "./home.css";
+import { Breadcrumb, Table } from "antd";
 import Loader from "../../components/loader/loader";
-import { addIcon, editIcon, homeIcon, options, redTrash } from "../../assets";
+import { addIcon, editIcon, homeIcon, redTrash } from "../../assets";
 import { callApi } from "../../api/apiCaller";
-import routes from "../../api/routes";
-import ModalDescription from "../../components/modalDescription/modalDescription";
-import OptionModal from "../../components/optionModal/optionModal";
+import { routes } from "../../api/routes";
 import { useNavigate } from "react-router-dom";
 import { GreenNotify } from "../../helper/helper";
-import EditModal from "../../components/editModal/editModal";
-// import EditModal from "../../components/editModal/editModal";
-// import EditOp from "../../components/editop/EditOp";
 
-const Quotes = () => {
+const Home = () => {
   const [isloading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [quotes, setQuotes] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [showModalOption, setShowModalOption] = useState(false);
   const [getServiceapi, setGetServiceApi] = useState(false);
-  const [popup, setPopup] = useState(false);
 
   const getQuotes = () => {
     let getRes = (res) => {
@@ -53,9 +45,9 @@ const Quotes = () => {
     );
   };
 
-    useEffect(() => {
-      getQuotes();
-    }, [getServiceapi]);
+  useEffect(() => {
+    getQuotes();
+  }, [getServiceapi]);
 
   const columns = [
     {
@@ -68,7 +60,6 @@ const Quotes = () => {
       dataIndex: "quote",
       align: "center",
       className: "type-name-column-header",
-
     },
     {
       title: "Edit",
@@ -91,7 +82,7 @@ const Quotes = () => {
       quote: item?.quote,
       edit: (
         <div
-          onClick={() => navigate("/editquote", { state: { item: item } })}
+          onClick={() => navigate("", { state: { item: item } })}
           style={{ cursor: "pointer" }}
         >
           <img src={editIcon} alt="editIcon" />
@@ -115,22 +106,27 @@ const Quotes = () => {
     return "server-role-odd-row";
   };
 
-
   return (
     <div className="admin-products-main-container">
       <Loader loading={isloading} />
       <Breadcrumb separator=">" className="bread-crumb">
         <div className="configure-server-home-icon">
-          <img src={homeIcon} alt="home-icon" />
+          <img
+            style={{ width: "1.7rem", height: "1.7rem" }}
+            src={homeIcon}
+            alt="home-icon"
+          />
         </div>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>Quotes</Breadcrumb.Item>
       </Breadcrumb>
       <div className="configure-server-roles-main-heading-container">
-        <h1>Quotes</h1>
-        <div onClick={() => navigate("/editmodal")} className="server-roles-add-btn">
+        <h1>Home</h1>
+        <div
+          onClick={() => navigate("/editmodal")}
+          className="server-roles-add-btn"
+        >
           <img src={addIcon} alt="" />
-          <p>Add New Quote</p>
+          <p>Add New</p>
         </div>
       </div>
       <div className="server-roles-tb-main-container">
@@ -138,12 +134,11 @@ const Quotes = () => {
           rowClassName={getRowClassName}
           columns={columns}
           dataSource={data}
-          pagination={true}
-          className="subscriptionapi-table"
+          pagination={{ pageSize: 5 }}
         ></Table>
       </div>
     </div>
   );
 };
 
-export default Quotes;
+export default Home;
